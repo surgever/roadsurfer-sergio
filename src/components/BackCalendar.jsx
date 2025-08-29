@@ -6,7 +6,6 @@ const BackCalendar = props => {
     const navigate = useNavigate()
     let { station, week, booking } = useParams()
     const handleGoBack = (e) => { 
-        console.log("e", e);
         navigate("..")
     }
     return (
