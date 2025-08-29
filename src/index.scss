@@ -378,6 +378,7 @@ header {
   .day-booking:nth-child(4) { animation-delay: .15s}
 }
 .booking-open {
+  .locationSearch, .weekNav { pointer-events: none;}
   .locationSearch { animation: fadeOutLeft .175s .1s ease-out both;}
   .weekNav        { animation: fadeOutLeft .15s ease-out both;}
   .backCalendar   { animation: fadeInLeft .2s .1s ease-in backwards;}
