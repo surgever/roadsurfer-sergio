@@ -12,6 +12,7 @@ const Autocomplete = props => {
 
     const [searchOpen, setSearchOpen] = useState(false)
     const [searchStarted, setSearchStarted] = useState(false)
+    const [loading, setLoading] = useState(false)
     const [searchText, setSearchText] = useState("")
     const [selectedSearchText, setSelectedSearchText] = useState("")
     const [searchResults, setSearchResults] = useState([])
@@ -22,6 +23,7 @@ const Autocomplete = props => {
     const handleSearchText = newText => {
         setSearchText(newText)
         setSearchStarted(true)
+        setLoading(true)
         if(newText.length > 0) {
             // Connect to API
             endpoint.searchParams.append(param, newText);
@@ -34,7 +36,9 @@ const Autocomplete = props => {
                 }
             }).then(stations => {
                 setSearchResults(stations);
+                setLoading(false)
             }).catch(error => {
+                setLoading(false)
                 // handle error
             })
         } else if(newText.length === 0) {
@@ -51,22 +55,25 @@ const Autocomplete = props => {
     }
     const handleCloseSearch = e => {
         e.preventDefault()
+        setLoading(false)
         setSearchOpen( false )
         setSearchResults([])
     }
     const handleClearSearch = e => {
         e.preventDefault()
         setSearchStarted(true)
+        setLoading(false)
         setSearchText('')
         setSearchResults([])
         autocomplateInputRef.current.focus()
     }
     const handleBlurSearch = e => {
         //if(! e.relatedTarget) handleCloseSearch(e)
+        setLoading(false)
         if( selectedSearchText !== searchText ) setSearchText(selectedSearchText)
     }
     return (
-        <div className={"autocomplete " + (searchOpen ? 'open' : 'closed')}>
+        <div className={"autocomplete " + (searchOpen ? 'open' : 'closed') + (loading ? ' loading' : ' loaded')}>
             <input type='text' ref={autocomplateInputRef} name="autocomplete"
                 className="autocomplete--input"
                 placeholder={ placeholder ? placeholder : 'Search...'}
@@ -76,6 +83,7 @@ const Autocomplete = props => {
                 value={ ! searchStarted && defaultValue ? defaultValue : searchText}
                 autoComplete="off"
             />
+            <span className="autocomplete--icon"></span>
             { (searchText || ! searchStarted && defaultValue ) && 
                 <button className='autocomplete--clear btn' onClick={handleClearSearch}></button>
             }

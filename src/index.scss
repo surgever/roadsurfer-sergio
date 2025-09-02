@@ -100,6 +100,7 @@ header {
   border: 1px solid #e5e9ed;
   background: white;
   border-radius: .5rem;
+  text-indent: 24px;
   .autocomplete:hover & {
     border-color: #c5c9cd;
   }
@@ -108,21 +109,76 @@ header {
     height: 40px;
   }
 }
+.autocomplete--icon {
+  position: absolute;
+  left: 10px;
+  top: 4px; 
+  width: 16px;
+  height: 16px;
+  display: block;
+  background: $seagreen;
+  border-radius: 50%;
+  &:before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 2px;
+    top: 8px; 
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-top: 15px solid $seagreen;
+    border-bottom-width: 0px;
+  }
+  &:after {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 2px;
+    top: 2px; 
+    width: 8px;
+    height: 8px;
+    border: 2px solid $seagreen;
+    background: white;
+    border-radius: 50%;
+  }
+  .loading &:after {
+    border: 3px dotted white;
+    animation: rotate360 2s linear infinite;
+    background: $seagreen;
+    left: 2px;
+    top: 2px; 
+    width: 6px;
+    height: 6px;
+    @keyframes rotate360 {
+      to {transform: rotate(360deg)}
+    }
+  }
+  @include md {
+    top: 8px; 
+    &:before {
+    top: 10px;
+    }
+  }
+}
 .autocomplete--clear {
   font-size: inherit;
   position: absolute;
-  top: 6px;
-  right: 6px;
+  top: 2px;
+  right: 3px;
   background: transparent;
   border: 0 none;
   color: $seagreen;
-  padding: 0 3px;
+  padding: 0 8px;
+  line-height: 26px;
   &:before {
     display: inline;
     content: "✕";
   }
   @include md {
     color: transparent;
+    line-height: 36px;
+    padding: 0 5px;
     .autocomplete:hover & {
       color: $seagreen;
     }
@@ -260,6 +316,7 @@ header {
     box-sizing: border-box;
     border: 2px solid #bbb;
     border-right-width: 0;
+    border-radius: 5px;
   }
   &:after {
     width: 0; height: 0;
@@ -318,7 +375,7 @@ header {
 }
 .backCalendar--icon:before {
   display: inline-block;
-  content: "⬅";
+  content: "⬅\FE0E";
   color: $seagreen;
   .backCalendar:focus & {
     color: white;
