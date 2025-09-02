@@ -76,17 +76,6 @@ const Week = props => {
             </Day>
           ))}
         </div>
-        <DndContext onDragEnd={handleDragEnd}>
-          {parent === null ? draggableMarkup : null}
-
-          {containers.map((id) => (
-            // We updated the Droppable component so it would accept an `id`
-            // prop and pass it to `useDroppable`
-            <Droppable key={id} id={id}>
-              {parent === id ? draggableMarkup : 'Drop here'}
-            </Droppable>
-          ))}
-        </DndContext>
       </>
         :
         <Outlet context={[bookingsData]} />
