@@ -20,27 +20,27 @@ const Autocomplete = props => {
 	const autocomplateInputRef = useRef(null);
     let typingStarted = false
 
-    const handleSearchText = newText => {
+    const handleSearchText = async newText => {
         setSearchText(newText)
         setSearchStarted(true)
         setLoading(true)
         if(newText.length > 0) {
-            // Connect to API
-            endpoint.searchParams.append(param, newText);
-            fetch(endpoint, {
-                method: 'GET',
-                headers: {'content-type':'application/json'},
-            }).then(res => {
-                if (res.ok) {
-                    return res.json();
-                }
-            }).then(stations => {
+            try {
+                // Connect to API
+                endpoint.searchParams.append(param, newText);
+                const res = await fetch(endpoint, {
+                    method: 'GET',
+                    headers: {'content-type':'application/json'},
+                })
+                if (!res.ok) { throw new Error("Failed to fetch stations") }
+                const stations = await res.json()
                 setSearchResults(stations);
                 setLoading(false)
-            }).catch(error => {
+            } catch (error) {
                 setLoading(false)
-                // handle error
-            })
+                console.error(error);
+                alert("Error fetching stations");
+            }
         } else if(newText.length === 0) {
             setSearchResults([]);
         }

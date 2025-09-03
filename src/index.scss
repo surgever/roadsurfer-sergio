@@ -36,6 +36,7 @@ body {
   border: 1px solid lightgrey;
   border-radius: 5px;
   min-height: 600px;
+  overflow: hidden;
 }
 .inner {
   width: 100%;
@@ -287,17 +288,38 @@ header {
   box-shadow: inset rgba(201, 211, 219, 0.5) 0 0 0 1px,
     rgba(255, 255, 255, 0) 0 0 0 1px,
     rgba(201, 211, 219, 0.25) 20px 14px 24px;
+  transition: box-shadow .2s;
   @include md {
     min-height: 90px;
+  }
+  &.on {
+    box-shadow: inset $seagreen 0 0 0 2px,
+      rgba(255, 255, 255, 0) 0 0 0 1px,
+      rgba(201, 211, 219, 0.6) 18px 10px 24px;
   }
 }
 .day--number {
   font-size: 24px;
   line-height: 22px;
+  .day.on & {
+    color: $seagreen
+  }
 }
 .day-booking {
   display: block;
   margin-top: 10px;
+}
+.bookingItem--handle:after {
+  content: "⠿";
+  cursor: move;
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0; 
+  width: 20px;
+  line-height:35px;
+  color: grey;
+  z-index: 1;
 }
 .booking-icon {
   display: inline-block;
@@ -415,6 +437,19 @@ header {
   text-align: center;
   color: lightgrey;
   font-style: italic;
+}
+
+.draggable {
+  z-index: 999;
+  position: relative;
+  color: black;
+}
+.droppable {
+  width: 400px;
+  height: 60px;
+  background: lightgrey;
+  display: block;
+  margin-bottom: 5px;
 }
 /* Animations */
 .booking-closed {

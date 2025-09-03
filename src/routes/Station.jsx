@@ -33,7 +33,7 @@ const Station = props => {
   useEffect(loadStation, [station]);
 
   return (
-      <Outlet context={[stationBookings]} />
+      <Outlet context={[stationBookings, setStationBookings]} />
   );
 };
 export default Station;

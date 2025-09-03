@@ -24,8 +24,6 @@ const BookingDetails = props => {
         <div className="bookingDetails">
             <h2 className="bookingDetails--title">Booking details: #{parseInt(booking)}</h2>
 
-                {/* { stationData.name && "Station context name:" stationData.name } */}
-            
             { data ?
             <dl className="bookingDetails--content">
                 {data.customerName && <>
