@@ -38,8 +38,8 @@ const Autocomplete = props => {
                 setLoading(false)
             } catch (error) {
                 setLoading(false)
-                console.error(error);
-                alert("Error fetching stations");
+                setSearchResults([])
+                console.error('error', error);
             }
         } else if(newText.length === 0) {
             setSearchResults([]);
