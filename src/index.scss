@@ -441,9 +441,11 @@ header {
 }
 
 .draggable {
-  z-index: 999;
   position: relative;
   color: black;
+  &.on {
+    z-index: 999;
+  }
 }
 .droppable {
   width: 400px;

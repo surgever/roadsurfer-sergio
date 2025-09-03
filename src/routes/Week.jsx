@@ -39,9 +39,6 @@ const Week = props => {
       // API code example 
       const endpoint = "https://605c94c36d85de00170da8b4.mockapi.io/stations/"+station+"/bookings/" + active.data.current.id
       console.log("\n    async () => {\n      try {\n        const response = await fetch(\n          '"+endpoint+"',\n         {\n          method: 'PUT',\n          headers: {'Content-Type': 'application/json'},\n          body: JSON.stringify({ "+key+": '"+newTime+"' }),\n        });\n        if (!response.ok) {\n          throw new Error('Failed to update booking');\n        }\n        const data = await response.json();\n        console.log('Booking updated:', data);\n      } catch (error) {alert('Error updating booking')}\n    }")
-    } else {
-      console.log('dropped out')
-      event.preventDefault()
     }
   };
 

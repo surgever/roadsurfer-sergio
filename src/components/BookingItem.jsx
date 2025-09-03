@@ -5,7 +5,7 @@ const BookingItem = props => {
     let { station, week } = useParams();
     const data = props.data
 
-    const {attributes, listeners, setNodeRef, transform} = useDraggable({
+    const {attributes, listeners, setNodeRef, transform, isDragging} = useDraggable({
         id: props.id,
         data : props.data
     });
@@ -14,7 +14,7 @@ const BookingItem = props => {
     } : undefined;
 
     return (
-        <div className="draggable" ref={setNodeRef} style={style} >
+        <div className={"draggable " + (isDragging ?'on':'off')} ref={setNodeRef} style={style} >
             <span className="bookingItem--handle" {...listeners} {...attributes}></span>
             <Link key={data.id} 
                 className="day-booking btn"
