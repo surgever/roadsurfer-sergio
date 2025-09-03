@@ -14,15 +14,16 @@ const BookingItem = props => {
     } : undefined;
 
     return (
-        <Link key={data.id} 
-            className="day-booking btn draggable"
-            to={"/station/"+ station +"/week/" + week +"/booking/" + data.id}
-            ref={setNodeRef} style={style} {...listeners} {...attributes}
-        >   
-            <span className={"booking-icon " + data.action}></span>
-            {data.customerName.replace(/[^a-zA-Z0-9- ]/g, '').substr(0, 20)}
-            <span className="bookingItem--handle"></span>
-        </Link>
+        <div className="draggable" ref={setNodeRef} style={style} >
+            <span className="bookingItem--handle" {...listeners} {...attributes}></span>
+            <Link key={data.id} 
+                className="day-booking btn"
+                to={"/station/"+ station +"/week/" + week +"/booking/" + data.id}
+            >   
+                <span className={"booking-icon " + data.action}></span>
+                {data.customerName.replace(/[^a-zA-Z0-9- ]/g, '').substr(0, 20)}
+            </Link>
+        </div>
     )
 }
 
